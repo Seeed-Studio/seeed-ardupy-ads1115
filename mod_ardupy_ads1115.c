@@ -43,7 +43,7 @@ m_generic_make(ads1115) {
         addr = mp_obj_get_int(args[0]);
         if ( (addr | 0x4A) != addr )
         {
-            mp_raise_ValueError("only 0x48,0x49,0x4A,0x4Bsupport!");
+            mp_raise_ValueError("only 0x48,0x49,0x4A,0x4B support!");
         }
     }    
     common_hal_ads1115_construct(self,addr);
@@ -53,7 +53,7 @@ m_generic_make(ads1115) {
 mp_obj_t ads1115_setOperateMode(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args){
     abstract_module_t *self = (abstract_module_t *)pos_args[0];
     uint16_t operateMode = mp_obj_get_int(pos_args[1]);
-    ret_val = common_hal_ads1115_setOperateMode(self,operateMode);
+    common_hal_ads1115_setOperateMode(self,operateMode);
     return mp_const_none;
 }
 MP_DEFINE_CONST_FUN_OBJ_KW(ads1115_setOperateMode_obj , 1 , ads1115_setOperateMode);
@@ -61,10 +61,19 @@ MP_DEFINE_CONST_FUN_OBJ_KW(ads1115_setOperateMode_obj , 1 , ads1115_setOperateMo
 mp_obj_t ads1115_setPGAGain(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args){
     abstract_module_t *self = (abstract_module_t *)pos_args[0];
     uint16_t PGAGain = mp_obj_get_int(pos_args[1]);
-    common_hal_ads1115_setOperateStaus(self,PGAGain);
+    common_hal_ads1115_setPGAGain(self,PGAGain);
     return mp_const_none;
 }
 MP_DEFINE_CONST_FUN_OBJ_KW(ads1115_setPGAGain_obj , 1 , ads1115_setPGAGain);
+
+mp_obj_t ads1115_setOperateStaus(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args){
+    abstract_module_t *self = (abstract_module_t *)pos_args[0];
+    uint16_t OperateStaus = mp_obj_get_int(pos_args[1]);
+    common_hal_ads1115_setOperateStaus(self,OperateStaus);
+    return mp_const_none;
+}
+MP_DEFINE_CONST_FUN_OBJ_KW(ads1115_setOperateStaus_obj , 1 , ads1115_setOperateStaus);
+
 
 mp_obj_t ads1115_setSampleRate(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args){
     abstract_module_t *self = (abstract_module_t *)pos_args[0];
@@ -169,6 +178,7 @@ const mp_rom_map_elem_t ads1115_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR___enter__), MP_ROM_PTR(&default___enter___obj) },
     { MP_ROM_QSTR(MP_QSTR___exit__),  MP_ROM_PTR(&ads1115_obj___exit___obj) },
     { MP_ROM_QSTR(MP_QSTR_setOperateMode), MP_ROM_PTR(&ads1115_setOperateMode_obj) },
+    { MP_ROM_QSTR(MP_QSTR_setOperateStaus), MP_ROM_PTR(&ads1115_setOperateStaus_obj) },
     { MP_ROM_QSTR(MP_QSTR_setPGAGain), MP_ROM_PTR(&ads1115_setPGAGain_obj) },
     { MP_ROM_QSTR(MP_QSTR_setSampleRate), MP_ROM_PTR(&ads1115_setSampleRate_obj)},
     { MP_ROM_QSTR(MP_QSTR_setInputMux), MP_ROM_PTR(&ads1115_setInputMux_obj)},

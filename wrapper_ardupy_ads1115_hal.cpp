@@ -40,11 +40,7 @@ void * operator new(size_t, void *);
 
 extern "C"{
     void common_hal_ads1115_construct(abstract_module_t * self,uint8_t addr){
-#ifdef WIO_TERMINAL    
-        self->module = new(m_new_obj(ADS1115<TwoWire>)) ADS1115<TwoWire>(Wire1);
-#else
         self->module = new(m_new_obj(ADS1115<TwoWire>)) ADS1115<TwoWire>(Wire);
-#endif
         ads1115.begin(addr);
     }
     void common_hal_ads1115_deinit(abstract_module_t * self){
