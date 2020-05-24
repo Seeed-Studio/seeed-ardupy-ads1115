@@ -1,0 +1,12 @@
+{
+    "name": "Seeed ArduPy ads1115",
+    "version": "1.0.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Seeed-Studio/seeed-ardupy-ads1115.git"
+    },
+    "dependencies": [{
+        "name": "Seeed_Arduino_ADS1115",
+        "url": "https://github.com/Seeed-Studio/Seeed_Arduino_ADS1115.git"
+    }]
+}
