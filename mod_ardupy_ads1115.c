@@ -41,7 +41,7 @@ m_generic_make(ads1115) {
     if (n_args == 1)
     {
         addr = mp_obj_get_int(args[0]);
-        if ( (addr | 0x4A) != addr )
+        if ( (addr | 0x4B) != addr )
         {
             mp_raise_ValueError("only 0x48,0x49,0x4A,0x4B support!");
         }
@@ -141,7 +141,7 @@ MP_DEFINE_CONST_FUN_OBJ_KW(ads1115_setHighThreshold_obj , 1 , ads1115_setHighThr
 
 void ads1115_obj_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest){
     abstract_module_t * self = (abstract_module_t *)self_in;
-    int value;
+    float value;
     if (dest[0] == MP_OBJ_NULL){
         if(attr == MP_QSTR_channel0){
             value = common_hal_ads1115_getConversionResults(self,channel0);
@@ -169,7 +169,7 @@ void ads1115_obj_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest){
         }
         dest[0] = mp_obj_new_float(value);
     }
-    generic_method_lookup(self_in, attr, dest);
+    generic_method_lookup(self, attr, dest);
 }   
 
 const mp_rom_map_elem_t ads1115_locals_dict_table[] = {
@@ -187,7 +187,7 @@ const mp_rom_map_elem_t ads1115_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_setCompaLatching), MP_ROM_PTR(&ads1115_setCompaLatching_obj)},
     { MP_ROM_QSTR(MP_QSTR_setCompaQueue), MP_ROM_PTR(&ads1115_setCompaQueue_obj)},
     { MP_ROM_QSTR(MP_QSTR_setLowThreshold), MP_ROM_PTR(&ads1115_setLowThreshold_obj)},
-    { MP_ROM_QSTR(MP_QSTR_setHighThreshold), MP_ROM_PTR(&ads1115_setHighThreshold_obj)}
+    { MP_ROM_QSTR(MP_QSTR_setHighThreshold), MP_ROM_PTR(&ads1115_setHighThreshold_obj)},
 };
 
 MP_DEFINE_CONST_DICT(ads1115_locals_dict, ads1115_locals_dict_table);
@@ -197,5 +197,5 @@ const mp_obj_type_t grove_ads1115_type = {
     .name = MP_QSTR_grove_ads1115,
     .make_new = ads1115_make_new,
     .locals_dict = (mp_obj_t)&ads1115_locals_dict,
-    .attr = ads1115_obj_attr,
+    .attr = &ads1115_obj_attr,
 };
